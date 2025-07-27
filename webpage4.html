@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone</title>
+    <meta name="description" content="A clone of Amazon's main page with featured products and categories.">
+    <meta name="keywords" content="Amazon, e-commerce, online shopping, deals">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #232F3E;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .search-bar {
+            display: flex;
+            flex: 1;
+            margin: 0 20px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            background-color: #febd69;
+            cursor: pointer;
+        }
+        .cart-icon {
+            font-size: 24px;
+            margin-right: 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #37475A;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .banner {
+            width: 100%;
+            height: 300px;
+            background: url('https://static.vecteezy.com/system/resources/previews/000/524/773/original/summer-sale-extra-wide-banner-vector.jpg') no-repeat center center/cover;
+        }
+        main {
+            padding: 20px;
+        }
+        .product-list, .gift-card-list, .deals-list, .register-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product, .gift-card, .deal, .register-section {
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .product img, .gift-card img, .deal img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product h2, .gift-card h2, .deal h2 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .product p, .gift-card p, .deal p {
+            color: #B12704;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .product button, .gift-card button, .deal button {
+            background-color: #febd69;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        footer {
+            background-color: #232F3E;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            header, nav, .product-list, .gift-card-list, .deals-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .register-section {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .register-section input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .register-section button {
+            width: 80%;
+            padding: 10px;
+            background-color: #febd69;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="cart.html" class="cart-icon" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i></a>
+        <div class="logo">Amazon</div>
+        <form class="search-bar" role="search">
+            <input type="text" placeholder="Search for products, brands and more" aria-label="Search">
+            <button type="submit">Search</button>
+        </form>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#" id="deals-btn">Today's Deals</a>
+            <a href="#" id="customer-service-btn">Customer Service</a>
+            <a href="#" id="gift-cards-btn">Gift Cards</a>
+            <a href="#" id="register-btn">Registry</a>
+	    <a href="#" id="sell-btn">Sell</a>
+        </nav>
+    </header>
+    <div class="banner" aria-label="Promotional Banner"></div>
+    <main>
+        <h1>Featured Products</h1>
+        <div class="product-list">
+            <div class="product">
+                <img src="https://www.vhv.rs/dpng/d/9-98222_milk-packet-hd-png-download.png" alt="Milk">
+                <h2>Milk</h2>
+                <p>$19.99</p>
+                <button type="button" onclick="addToCart('Milk', 19.99)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://m.media-amazon.com/images/I/81QXNeOuE+L._AC_SL1500_.jpg" alt="Biscuit">
+                <h2>Biscuit</h2>
+                <p>$29.99</p>
+                <button type="button" onclick="addToCart('Biscuit', 29.99)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://badiaspices.com/wp-content/uploads/2016/12/033844005955-1536x1536.jpg" alt="Sesame Seeds">
+                <h2>Sesame Seeds</h2>
+                <p>$39.99</p>
+                <button type="button" onclick="addToCart('Sesame Seeds', 39.99)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://tse4.mm.bing.net/th?id=OIP.bCCOFXZ2Y8oPJ4fB6Z2k8wHaHa&pid=Api&P=0&h=180" alt="Chips">
+                <h2>Chips</h2>
+                <p>$29.99</p>
+                <button type="button" onclick="addToCart('Chips', 29.99)">Add to Cart</button>
+            </div>
+            <!-- Add more products as needed -->
+        </div>
+        <div id="gift-card-section" class="gift-card-list hidden">
+            <h1>Gift Cards</h1>
+            <div class="gift-card">
+                <img src="https://tse1.mm.bing.net/th?id=OIP.en655K1xLigDq0CKquLJRgHaD4&pid=Api&P=0&h=180" alt="Amazon Gift Card $25">
+                <h2>Amazon Gift Card $25</h2>
+                <p>$25.00</p>
+                <button type="button" onclick="addToCart('Amazon Gift Card $25', 25.00)">Add to Cart</button>
+            </div>
+            <div class="gift-card">
+                <img src="https://www.gannett-cdn.com/-mm-/e33cf72257acc17a394ef86a499eb85523d65a92/c=52-79-715-454&r=x1683&c=3200x1680/local/-/media/2015/11/20/IAGroup/DesMoines/635836108206443829-Amazon-50-gc.jpg" alt="Amazon Gift Card $50">
+                <h2>Amazon Gift Card $50</h2>
+                <p>$50.00</p>
+                <button type="button" onclick="addToCart('Amazon Gift Card $50', 50.00)">Add to Cart</button>
+            </div>
+            <div class="gift-card">
+                <img src="https://s2982.pcdn.co/wp-content/uploads/2016/01/100-amazon-gift-card-1024x834.jpg"Amazon Gift Card $100">
+                <h2>Amazon Gift Card $100</h2>
+                <p>$100.00</p>
+                <button type="button" onclick="addToCart('Amazon Gift Card $100', 100.00)">Add to Cart</button>
+            </div>
+            <!-- Add more gift cards as needed -->
+        </div>
+        <div id="deals-section" class="deals-list hidden">
+            <h1>Today's Deals</h1>
+            <div class="deal">
+                <img src="https://i5.walmartimages.com/asr/9b14670e-d49e-4e7f-b467-e5282759210d_1.34ff47561171b926646b4e73f24122ff.jpeg" alt="Deal 1">
+                <h2>Deal 1</h2>
+                <p>$9.99</p>
+                <button type="button" onclick="addToCart('Deal 1', 9.99)">Add to Cart</button>
+            </div>
+            <div class="deal">
+                <img src="https://tse4.mm.bing.net/th?id=OIP.C4xmZzR6NWxhJHX-BKSsHAHaEM&pid=Api&P=0&h=180" alt="Deal 2">
+                <h2>Deal 2</h2>
+                <p>$19.99</p>
+                <button type="button" onclick="addToCart('Deal 2', 19.99)">Add to Cart</button>
+            </div>
+            <div class="deal">
+                <img src="https://free-psd-templates.com/wp-content/uploads/2016/12/1bfdea18816493.562cfcdb8778e.jpg" alt="Deal 3">
+                <h2>Deal 3</h2>
+                <p>$29.99</p>
+                <button type="button" onclick="addToCart('Deal 3', 29.99)">Add to Cart</button>
+            </div>
+            <!-- Add more deals as needed -->
+        </div>
+        <div id="register-section" class="register-section hidden">
+            <h1>Register</h1>
+            <input type="text" placeholder="First Name" required>
+            <input type="text" placeholder="Last Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Confirm Password" required>
+            <button type="button">Register</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Amazon Clone - All rights reserved</p>
+    </footer>
+
+    <!-- The Modal -->
+    <div id="customerServiceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Customer Service</h2>
+            <p>For assistance, please contact us at:</p>
+            <ul>
+                <li>Phone: 1-800-123-4567</li>
+                <li>Email: support@amazonclone.com</li>
+            </ul>
+        </div>
+    </div>
+	<div id="sell-section" class="sell-section hidden">
+        <h1>Sell on Amazon</h1>
+        <p>Are you a seller interested in selling products on Amazon?</p>
+        <p>Contact our seller support team for more details:</p>
+        <ul>
+            <li>Phone: 1-800-123-4567</li>
+            <li>Email: seller-support@amazonclone.com</li>
+        </ul>
+    </div>
+
+    <script>
+        function addToCart(productName, productPrice) {
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push({ name: productName, price: productPrice });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(productName + ' has been added to your cart.');
+            } catch (e) {
+                alert('Unable to add to cart. Please try again.');
+            }
+        }
+
+        // Modal Script
+        document.getElementById('customer-service-btn').addEventListener('click', function() {
+            document.getElementById('customerServiceModal').style.display = 'block';
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('customerServiceModal').style.display = 'none';
+        });
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('customerServiceModal')) {
+                document.getElementById('customerServiceModal').style.display = 'none';
+            }
+        }
+
+        // Show Gift Cards Section
+        document.getElementById('gift-cards-btn').addEventListener('click', function() {
+            document.getElementById('gift-card-section').classList.toggle('hidden');
+            document.getElementById('deals-section').classList.add('hidden');
+            document.getElementById('register-section').classList.add('hidden');
+        });
+
+        // Show Today's Deals Section
+        document.getElementById('deals-btn').addEventListener('click', function() {
+            document.getElementById('deals-section').classList.toggle('hidden');
+            document.getElementById('gift-card-section').classList.add('hidden');
+            document.getElementById('register-section').classList.add('hidden');
+        });
+
+        // Show Register Section
+        document.getElementById('register-btn').addEventListener('click', function() {
+            document.getElementById('register-section').classList.toggle('hidden');
+            document.getElementById('gift-card-section').classList.add('hidden');
+            document.getElementById('deals-section').classList.add('hidden');
+        });
+	document.getElementById('sell-btn').addEventListener('click', function() {
+            document.getElementById('sell-section').classList.toggle('hidden');
+            // Hide other sections if needed
+            document.getElementById('gift-card-section').classList.add('hidden');
+            document.getElementById('deals-section').classList.add('hidden');
+            document.getElementById('register-section').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
